@@ -1,0 +1,333 @@
+/* Floating Avatar Styles */
+
+.floating-avatar {
+  position: fixed;
+  bottom: clamp(2rem, 5vh, 4rem);
+  right: clamp(1rem, 3vw, 2rem);
+  z-index: 999;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  user-select: none;
+}
+
+.floating-avatar:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 8px 20px rgba(102, 126, 234, 0.4));
+}
+
+.avatar-container {
+  width: clamp(80px, 10vw, 120px);
+  height: clamp(80px, 10vw, 120px);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  animation: float 3s ease-in-out infinite;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.floating-avatar.hovered .avatar-container {
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.avatar-svg {
+  width: 70%;
+  height: 70%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.avatar-image {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-avatar.hovered {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Message Bubble */
+.message-bubble {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: white;
+  color: #2c3e50;
+  padding: clamp(0.75rem, 1.5vw, 1rem);
+  border-radius: clamp(8px, 1.5vw, 12px);
+  max-width: clamp(200px, 90vw, 280px);
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #667eea;
+}
+
+.message-bubble.show,
+.floating-avatar.hovered .message-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.message-bubble p {
+  margin: 0;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.bubble-pointer {
+  position: absolute;
+  bottom: -8px;
+  right: clamp(1rem, 5vw, 1.5rem);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+}
+
+/* Click Indicator */
+.click-indicator {
+  position: absolute;
+  bottom: -2.5rem;
+  right: 50%;
+  transform: translateX(50%);
+  opacity: 0;
+  animation: pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.click-indicator span {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: clamp(10px, 1.5vw, 12px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(50%) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(50%) translateY(-5px);
+  }
+}
+
+.floating-avatar.hovered .click-indicator {
+  animation: none;
+  opacity: 0;
+}
+
+/* Modal Overlay */
+.avatar-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: clamp(1rem, 3vw, 2rem);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.avatar-modal {
+  background: white;
+  border-radius: clamp(12px, 2vw, 20px);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: clamp(300px, 90vw, 600px);
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f0f0f0;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #667eea;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.avatar-modal h2 {
+  color: #2c3e50;
+  font-size: clamp(20px, 4vw, 28px);
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+  text-align: center;
+}
+
+.modal-content {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.modal-section {
+  border: 2px solid #ecf0f1;
+  border-radius: clamp(8px, 1.5vw, 12px);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  transition: all 0.3s ease;
+}
+
+.modal-section:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.modal-section h3 {
+  color: #667eea;
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(16px, 3vw, 20px);
+}
+
+.modal-section p {
+  color: #7f8c8d;
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1rem) 0;
+  font-size: clamp(12px, 1.8vw, 14px);
+  line-height: 1.5;
+}
+
+.modal-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: clamp(0.6rem, 1.2vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
+  border-radius: clamp(6px, 1.2vw, 8px);
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.modal-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .floating-avatar {
+    bottom: clamp(1.5rem, 4vh, 3rem);
+    right: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .message-bubble {
+    max-width: clamp(150px, 80vw, 250px);
+  }
+
+  .avatar-modal {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .click-indicator span {
+    font-size: 10px;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-avatar {
+    bottom: 1.5rem;
+    right: 1rem;
+  }
+
+  .avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .message-bubble {
+    right: -10px;
+    max-width: 200px;
+  }
+
+  .avatar-modal {
+    max-height: 80vh;
+    margin: 0 1rem;
+  }
+
+  .click-indicator {
+    display: none;
+  }
+}
+
+/* Desktop Enhancement */
+@media (min-width: 1200px) {
+  .floating-avatar {
+    bottom: 5rem;
+    right: 3rem;
+  }
+
+  .floating-avatar:hover {
+    transform: scale(1.15);
+  }
+}
