@@ -141,7 +141,8 @@ const HealthChecker = () => {
         }}>
           <h3 style={{ margin: '0 0 8px 0', fontSize: '18px' }}>Live AI-Powered Analysis</h3>
           <p style={{ margin: '0', fontSize: '14px', opacity: '0.9' }}>
-            Experience our intelligent health analysis system. Currently in active-mode with live AI responses.
+            Experience our intelligent health analysis system. We are currently in active-mode with live AI responses.<br></br>
+            To access our Online-Gym, BMI-reader and Healthy Diet Shop, please click the floating nurse-avatar at the bottom right corner of the screen. Your health journey starts here!
           </p>
         </div>
 
