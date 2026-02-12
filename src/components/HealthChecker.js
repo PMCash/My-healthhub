@@ -35,7 +35,6 @@ const HealthChecker = () => {
     setError('');
     setResponse('');
 
-    // Replace this URL with your actual Render backend URL
     const BACKEND_URL = 'https://ai-health-coach-dr-ai-backend-41va.onrender.com';
     
     try {
@@ -95,75 +94,7 @@ const HealthChecker = () => {
       setResponse(data.analysis);
     } catch (err) {
       console.error('Error calling backend:', err);
-      
-      // Handle specific array format error
-      if (err.message.includes('array')) {
-        setError('✅ Format Fixed: The frontend now sends symptoms as an array as expected by the backend. The error should be resolved.');
-        return;
-      }
-      
-      // Provide helpful error messages and demo response
-      if (err.message.includes('API endpoint not found') || err.message.includes('404')) {
-        setError('');  // Clear error since we're providing a demo response
-        
-        // Generate a realistic demo response based on symptoms
-        const generateDemoResponse = (symptoms, age, gender) => {
-          const commonSymptoms = symptoms.toLowerCase();
-          let assessment = '';
-          let recommendations = [];
-          
-          // Basic symptom analysis
-          if (commonSymptoms.includes('headache') || commonSymptoms.includes('head')) {
-            assessment = 'Headaches can be caused by various factors including tension, dehydration, eye strain, or stress.';
-            recommendations = ['Stay hydrated', 'Get adequate rest', 'Consider reducing screen time', 'Apply cold or warm compress'];
-          } else if (commonSymptoms.includes('fever') || commonSymptoms.includes('temperature')) {
-            assessment = 'Fever indicates your body is fighting an infection. Monitor your temperature and overall condition.';
-            recommendations = ['Rest and stay hydrated', 'Monitor temperature regularly', 'Seek medical attention if fever persists or gets worse'];
-          } else if (commonSymptoms.includes('cough') || commonSymptoms.includes('throat')) {
-            assessment = 'Respiratory symptoms may indicate a viral or bacterial infection, allergies, or irritation.';
-            recommendations = ['Stay hydrated', 'Use throat lozenges', 'Avoid irritants like smoke', 'Consider honey for soothing'];
-          } else if (commonSymptoms.includes('stomach') || commonSymptoms.includes('nausea') || commonSymptoms.includes('digestive')) {
-            assessment = 'Digestive symptoms can be related to food, stress, medication, or underlying conditions.';
-            recommendations = ['Eat bland foods (BRAT diet)', 'Stay hydrated', 'Avoid dairy and fatty foods', 'Rest your digestive system'];
-          } else {
-            assessment = 'Based on your symptoms, there could be various underlying causes that should be evaluated.';
-            recommendations = ['Monitor your symptoms', 'Stay hydrated', 'Get adequate rest', 'Note any changes or worsening'];
-          }
-          
-          return `🤖 **Dr. AI Health Assessment** 
-
-**Patient Information:**
-- **Age**: ${age} years
-- **Gender**: ${gender}
-- **Reported Symptoms**: ${symptoms}
-
-**Initial Assessment:**
-${assessment}
-
-**Recommended Actions:**
-${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
-
-**Important Disclaimers:**
-⚠️ This is an AI-generated assessment for informational purposes only
-⚠️ Always consult with qualified healthcare professionals for proper diagnosis
-⚠️ Seek immediate medical attention for severe or emergency symptoms
-
-**When to Seek Immediate Care:**
-- Difficulty breathing or chest pain
-- Severe pain or persistent high fever
-- Signs of severe dehydration
-- Any symptoms that worsen rapidly
-
----
-*This demo response simulates AI analysis. For real AI-powered health insights, the backend API needs to be implemented with OpenAI integration.*`;
-        };
-        
-        setResponse(generateDemoResponse(formData.symptoms, formData.age, formData.gender));
-      } else if (err.message.includes('HTML instead of JSON')) {
-        setError('❌ Backend Issue: The server is returning HTML error pages instead of JSON. The API endpoints need to be implemented.');
-      } else {
-        setError(err.message || 'Failed to get response from Dr. AI. Please check your backend implementation.');
-      }
+      setError(err.message || 'Failed to get response from Dr. AI. Please try again or contact support if the issue persists.');
     } finally {
       setLoading(false);
     }
@@ -198,7 +129,7 @@ ${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           </div>
         </div>
 
-        {/* Demo Mode Info Banner */}
+        {/* Live AI Status Banner */}
         <div className="demo-banner" style={{
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           color: 'white',
@@ -208,9 +139,9 @@ ${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           textAlign: 'center',
           boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)'
         }}>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: '18px' }}>🤖 AI Demo Mode Active</h3>
+          <h3 style={{ margin: '0 0 8px 0', fontSize: '18px' }}>Live AI-Powered Analysis</h3>
           <p style={{ margin: '0', fontSize: '14px', opacity: '0.9' }}>
-            Experience our intelligent health analysis system. Currently running in demo mode with simulated AI responses.
+            Experience our intelligent health analysis system. Currently in active-mode with live AI responses.
           </p>
         </div>
 
@@ -310,16 +241,13 @@ ${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
       {loading && (
         <div className="loading">
           <div>🤖 Dr. AI is examining your symptoms...</div>
-          <div style={{ fontSize: '14px', marginTop: '10px' }}>Connecting to your Render backend...</div>
+          <div style={{ fontSize: '14px', marginTop: '10px' }}>Analyzing with advanced AI technology...</div>
         </div>
       )}
 
       {error && (
         <div className="error">
           <strong>Error:</strong> {error}
-          <div style={{ fontSize: '14px', marginTop: '10px' }}>
-            Make sure to update the BACKEND_URL in the code with your actual Render URL
-          </div>
         </div>
       )}
 
