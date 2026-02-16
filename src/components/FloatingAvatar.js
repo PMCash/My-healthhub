@@ -5,8 +5,8 @@ import femaleAvatar from '../assets/female-avatar.png';
 const FloatingAvatar = ({ 
   externalLink = '',
   bmiLink = 'https://bmi-health-checker.techstudio24-365.com/',
-  gymLink = 'https://techstudio24-365.com/gym',
-  consultationLink = 'https://techstudio24-365.com'
+  gymLink = 'https://gym.techstudio24-365.com',
+  dietShoppingLink = 'https://dietshop.techstudio24-365.com'
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -31,9 +31,9 @@ const FloatingAvatar = ({
     }
   };
 
-  const handleConsultationClick = () => {
-    if (consultationLink) {
-      window.open(consultationLink, '_blank');
+  const handleDietShoppingClick = () => {
+    if (dietShoppingLink) {
+      window.open(dietShoppingLink, '_blank');
     }
   };
 
@@ -91,7 +91,7 @@ const FloatingAvatar = ({
               <div className="modal-section">
                 <h3>🏥 Healthy Diet Shop</h3>
                 <p>Get personalized healthy diet advice from our AI-powered health checker. Also available for purchase are healthy diet eBooks, foods, beverages and supplements tailored to your needs.</p>
-                <button className="modal-btn" onClick={handleConsultationClick}>Visit Healthy Diet Shop</button>
+                <button className="modal-btn" onClick={handleDietShoppingClick}>Visit Healthy Diet Shop</button>
               </div>
             </div>
           </div>
