@@ -18,8 +18,8 @@ function App() {
       <FloatingAvatar 
         externalLink=""
         bmiLink="https://bmi-health-checker.techstudio24-365.com/"
-        gymLink="https://techstudio24-365.com/gym"
-        consultationLink="https://techstudio24-365.com"
+        gymLink="https://gym.techstudio24-365.com/"
+        consultationLink="https://dietshop.techstudio24-365.com"
       />
       
       <div className="container">
